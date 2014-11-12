@@ -19,8 +19,21 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('welcome_message');
+        $content = $this->load->view('content.php', null ,true);
+        $this->load->view('welcome_message', array('content' => $content));
 	}
+    
+    public function user()
+    {
+        $content = $this->load->view('user.php', null ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+    
+    public function event()
+    {
+        $content = $this->load->view('event.php', null ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
 }
 
 /* End of file welcome.php */
