@@ -17,10 +17,20 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	function __construct()
+	 {
+	   parent::__construct();
+	   $this->load->model('user','',TRUE);
+	   if(!$this->session->userdata('logged_in'))
+		{
+			redirect(base_url());	
+		}
+	 } 
+	 
 	public function index()
 	{
-        $content = $this->load->view('content.php', null ,true);
-        $this->load->view('welcome_message', array('content' => $content));
+		$content = $this->load->view('content.php', null ,true);
+        $this->load->view('welcome_message', array('content' => $content));	
 	}
     
     public function user()
@@ -34,6 +44,11 @@ class Welcome extends CI_Controller {
         $content = $this->load->view('event.php', null ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
+
+	public function login()
+	{
+		$this->load->view("login");
+	}
 }
 
 /* End of file welcome.php */
