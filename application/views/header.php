@@ -26,10 +26,11 @@
                             <img src="<?php echo asset_img('avatar3.png');?>" class="img-circle" alt="User Image" />
                             <p>
                                 Admin
-                                <small>Member since Nov. 2012</small>
+<!--                                <small>Member since Nov. 2012</small>-->
                             </p>
                         </li>
                         <!-- Menu Body -->
+<!--
                         <li class="user-body">
                             <div class="col-xs-4 text-center">
                                 <a href="#">Followers</a>
@@ -41,13 +42,16 @@
                                 <a href="#">Friends</a>
                             </div>
                         </li>
+-->
                         <!-- Menu Footer-->
                         <li class="user-footer">
+<!--
                             <div class="pull-left">
                                 <a href="#" class="btn btn-default btn-flat">Profile</a>
                             </div>
+-->
                             <div class="pull-right">
-                                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="<?php echo base_url();?>/index.php/welcome/logout" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

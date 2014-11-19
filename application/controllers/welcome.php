@@ -21,6 +21,7 @@ class Welcome extends CI_Controller {
 	 {
 	   parent::__construct();
 	   $this->load->model('user','',TRUE);
+	   $this->load->model('event','',TRUE);
 	   if(!$this->session->userdata('logged_in'))
 		{
 			redirect(base_url());	
@@ -28,7 +29,7 @@ class Welcome extends CI_Controller {
 	 } 
 	 
 	public function index()
-	{
+    {
 		$content = $this->load->view('content.php', null ,true);
         $this->load->view('welcome_message', array('content' => $content));	
 	}
@@ -41,7 +42,10 @@ class Welcome extends CI_Controller {
     
     public function event()
     {
-        $content = $this->load->view('event.php', null ,true);
+        $events = $this->event->get_events();
+        $data = array();
+        $data['events'] = $events;
+        $content = $this->load->view('event.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
 
@@ -49,6 +53,12 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view("login");
 	}
+    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url());	
+    }    
 }
 
 /* End of file welcome.php */
