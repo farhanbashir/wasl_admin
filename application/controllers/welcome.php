@@ -36,7 +36,10 @@ class Welcome extends CI_Controller {
     
     public function user()
     {
-        $content = $this->load->view('user.php', null ,true);
+        $users = $this->user->get_users();
+        $data = array();
+        $data['users'] = $users;
+        $content = $this->load->view('users.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
     

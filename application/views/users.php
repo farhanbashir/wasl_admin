@@ -1,7 +1,7 @@
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <h1>
-        Events
+        Users
 <!--        <small>preview of simple tables</small>-->
     </h1>
 <!--
@@ -33,26 +33,30 @@
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>Name</th>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Address</th>
-                            <th>Creator</th>
+                            <th>Username</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Phone</th>
+                            <th>Company Name</th>
+                            <th>Personal Email</th>
+                            <th>Company Email</th>
                             <th>Status</th>
-                            <th>Description</th>
+                            <th>Designation</th>
                         </tr>
                         <?php
-                        foreach($events as $event)
+                        foreach($users as $user)
                         {
                         ?>    
                         <tr>
-                            <td><?php echo $event['name'];?></td>
-                            <td><?php echo $event['start_date'];?></td>
-                            <td><?php echo $event['end_date'];?></td>
-                            <td><?php echo $event['address'];?></td>
-                            <td><?php echo $event['first_name'].' '.$event['last_name'];?></td>
+                            <td><?php echo $user['username'];?></td>
+                            <td><?php echo $user['first_name'];?></td>
+                            <td><?php echo $user['last_name'];?></td>
+                            <td><?php echo $user['phone'];?></td>
+                            <td><?php echo $user['company_name'];?></td>
+                            <td><?php echo $user['personal_email'];?></td>
+                            <td><?php echo $user['company_email'];?></td>
                             <td><span class="label label-success">Approved</span></td>
-                            <td><?php echo $event['description'];?></td>
+                            <td><?php echo $user['designation'];?></td>
                         </tr>
                         <?php
                         }

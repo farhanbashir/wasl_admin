@@ -23,7 +23,11 @@ Class User extends CI_Model
     
  function get_users()
  {
-    
+     $sql = "select * from users order by id desc" ;
+     $query = $this->db->query($sql);
+     $result = $query->result_array(); 
+     $query->free_result();
+     return $result;
  }     
      
 }
