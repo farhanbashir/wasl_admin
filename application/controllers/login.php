@@ -61,7 +61,7 @@ class Login extends CI_Controller {
 	   }
 	   else
 	   {
-         $this->load->view('login');	
+           $this->load->view('login',array("error"=>"Invalid username or password"));	
 	     $this->form_validation->set_message('check_database', 'Invalid username or password');
 	     return false;
 	   }

@@ -22,6 +22,14 @@
             <div class="header">Sign In</div>
             <form action="<?php echo base_url();?>index.php/login/check_database" method="post">
                 <div class="body bg-gray">
+                    <?php
+                    if(isset($error))
+                    {
+                        echo '<div class="form-group">
+                                '.$error.'
+                            </div>';
+                    }    
+                    ?>
                     <div class="form-group">
                         <input type="text" name="username" class="form-control" placeholder="User ID"/>
                     </div>
