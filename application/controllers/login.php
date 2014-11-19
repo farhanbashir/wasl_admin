@@ -32,7 +32,7 @@ class Login extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('login');	
+            $this->load->view('login');	
 		}
         
 	}
@@ -61,6 +61,7 @@ class Login extends CI_Controller {
 	   }
 	   else
 	   {
+         $this->load->view('login');	
 	     $this->form_validation->set_message('check_database', 'Invalid username or password');
 	     return false;
 	   }
