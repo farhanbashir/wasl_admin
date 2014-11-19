@@ -25,7 +25,7 @@
                     <?php
                     if(isset($error))
                     {
-                        echo '<div class="form-group">
+                        echo '<div class="callout callout-danger">
                                 '.$error.'
                             </div>';
                     }    
