@@ -40,6 +40,7 @@
                             <th>Creator</th>
                             <th>Status</th>
                             <th>Description</th>
+                            <th>Action</th>
                         </tr>
                         <?php
                         foreach($events as $event)
@@ -53,6 +54,9 @@
                             <td><?php echo $event['first_name'].' '.$event['last_name'];?></td>
                             <td><span class="label label-success">Approved</span></td>
                             <td><?php echo $event['description'];?></td>
+                            <td>
+                                <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>
+                            </td>
                         </tr>
                         <?php
                         }

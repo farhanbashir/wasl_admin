@@ -2,6 +2,11 @@
 Class Event extends CI_Model
 {
     
+ function get_total_events()
+ {
+     return $this->db->count_all('events');
+ }   
+    
  function get_events()
  {
      $sql = "select e.*,u.first_name,u.last_name from events e 

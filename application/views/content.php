@@ -4,10 +4,10 @@
         Dashboard
         <small>Control panel</small>
     </h1>
-    <ol class="breadcrumb">
+    <!-- <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Dashboard</li>
-    </ol>
+    </ol> -->
 </section>
 
 <!-- Main content -->
@@ -20,7 +20,7 @@
             <div class="small-box bg-aqua">
                 <div class="inner">
                     <h3>
-                        150
+                        <?php echo $total_events;?>
                     </h3>
                     <p>
                         Total Events
@@ -58,7 +58,7 @@
             <div class="small-box bg-yellow">
                 <div class="inner">
                     <h3>
-                        44
+                        <?php echo $total_users;?>
                     </h3>
                     <p>
                         Total Users

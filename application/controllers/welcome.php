@@ -30,7 +30,11 @@ class Welcome extends CI_Controller {
 	 
 	public function index()
     {
-		$content = $this->load->view('content.php', null ,true);
+        $data = array();
+        $data['total_events'] = $this->event->get_total_events();
+        $data['total_users'] = $this->user->get_total_users();
+        
+		$content = $this->load->view('content.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));	
 	}
     
@@ -41,6 +45,16 @@ class Welcome extends CI_Controller {
         $data['users'] = $users;
         $content = $this->load->view('users.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
+    }
+    
+    public function user_detail($user_id)
+    {
+        debug($user_id,1);
+    }
+    
+    public function event_detail($event_id)
+    {
+        debug($event_id,1);
     }
     
     public function event()

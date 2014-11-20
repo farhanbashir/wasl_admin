@@ -20,6 +20,11 @@ Class User extends CI_Model
      return false;
    }
  }
+ 
+ function get_total_users()
+ {
+     return $this->db->count_all('users');
+ }
     
  function get_users()
  {
