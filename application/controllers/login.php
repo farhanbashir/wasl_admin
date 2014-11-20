@@ -46,17 +46,19 @@ class Login extends CI_Controller {
 	   //query the database
 	   $result = $this->user->login($username, $password);
 	 
-	   if($result)
+       //temporary work for admin        
+	   if($username == "admin@wasl.com" && $password == "wasladmin")
 	   {
 	     $sess_array = array();
-	     foreach($result as $row)
-	     {
-	       $sess_array = array(
-	         'id' => $row->id,
-	         'username' => $row->username
-	       );
-	       $this->session->set_userdata('logged_in', $sess_array);
-	     }
+           $this->session->set_userdata('logged_in', array('id' => 1,'username' => $username));   
+//	     foreach($result as $row)
+//	     {
+//	       $sess_array = array(
+//	         'id' => $row->id,
+//	         'username' => $row->username
+//	       );
+//	       $this->session->set_userdata('logged_in', $sess_array);
+//	     }
 	     redirect(base_url()."index.php/welcome");
 	   }
 	   else

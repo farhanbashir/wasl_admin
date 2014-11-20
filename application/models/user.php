@@ -26,6 +26,15 @@ Class User extends CI_Model
      return $this->db->count_all('users');
  }
     
+function get_user_detail($user_id)
+{
+    $sql = "select * from users where id=$user_id" ;
+    $query = $this->db->query($sql);
+    $result = $query->result_array(); 
+    $query->free_result();
+    return $result[0];
+}   
+    
  function get_users()
  {
      $sql = "select * from users order by id desc" ;

@@ -49,12 +49,19 @@ class Welcome extends CI_Controller {
     
     public function user_detail($user_id)
     {
-        debug($user_id,1);
+        $data = array();
+        $data['detail'] = $this->user->get_user_detail($user_id);
+        $content = $this->load->view('user_detail.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
     }
     
     public function event_detail($event_id)
     {
-        debug($event_id,1);
+        $data = array();
+        $data['detail'] = $this->event->get_event_detail($event_id);
+        $content = $this->load->view('event_detail.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+        
     }
     
     public function event()

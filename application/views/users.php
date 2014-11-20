@@ -42,6 +42,7 @@
                             <th>Company Email</th>
                             <th>Status</th>
                             <th>Designation</th>
+                            <th>Action</th>
                         </tr>
                         <?php
                         foreach($users as $user)
@@ -57,6 +58,9 @@
                             <td><?php echo $user['company_email'];?></td>
                             <td><span class="label label-success">Approved</span></td>
                             <td><?php echo $user['designation'];?></td>
+                            <td>
+                                <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $user['id'];?>">View</a>
+                            </td>
                         </tr>
                         <?php
                         }
