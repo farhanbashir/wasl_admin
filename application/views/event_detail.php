@@ -35,6 +35,14 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Attendees:</th>
+                            <td>
+                                <a href="<?php echo base_url();?>/index.php/welcome/event_users/<?php echo $detail['id'];?>">
+                                View List
+                                </a>    
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Description:</th>
                             <td><?php echo $detail['description'];?></td>
                         </tr>

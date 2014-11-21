@@ -28,6 +28,18 @@ Class Event extends CI_Model
      $query->free_result();
      return $result[0];
  }     
+
+ function get_event_users($event_id)
+ {
+    $sql = "select e.name,u.id as user_id,u.first_name,u.last_name from user_events ue 
+            inner join users u on u.id=ue.user_id 
+            inner join events e on e.id=ue.event_id 
+            where event_id=$event_id";
+    $query = $this->db->query($sql);
+    $result = $query->result_array(); 
+    $query->free_result();
+    return $result;
+ }
      
 }
 ?>

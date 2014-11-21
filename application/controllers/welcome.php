@@ -63,6 +63,15 @@ class Welcome extends CI_Controller {
         $this->load->view('welcome_message', array('content' => $content));
         
     }
+
+    public function event_users($event_id)
+    {
+        $data = array();
+        $data['event_users'] = $this->event->get_event_users($event_id);
+        
+        $content = $this->load->view('event_users.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
     
     public function event()
     {
