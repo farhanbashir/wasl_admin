@@ -15,7 +15,7 @@
 
 <!-- Main content -->
 <section class="content">
-    
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -45,14 +45,18 @@
                         <?php
                         foreach($events as $event)
                         {
-                        ?>    
+                        ?>
                         <tr>
                             <td><?php echo $event['name'];?></td>
                             <td><?php echo $event['start_date'];?></td>
                             <td><?php echo $event['end_date'];?></td>
                             <td><?php echo $event['address'];?></td>
                             <td><?php echo $event['first_name'].' '.$event['last_name'];?></td>
-                            <td><span class="label label-success">Approved</span></td>
+                            <td>
+                                <?php
+                                    echo ($event['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                ?>
+                            </td>
                             <td><?php echo $event['description'];?></td>
                             <td>
                                 <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>

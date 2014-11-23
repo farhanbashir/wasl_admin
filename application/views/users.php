@@ -15,7 +15,7 @@
 
 <!-- Main content -->
 <section class="content">
-    
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -47,7 +47,7 @@
                         <?php
                         foreach($users as $user)
                         {
-                        ?>    
+                        ?>
                         <tr>
                             <td><?php echo $user['username'];?></td>
                             <td><?php echo $user['first_name'];?></td>
@@ -56,7 +56,11 @@
                             <td><?php echo $user['company_name'];?></td>
                             <td><?php echo $user['personal_email'];?></td>
                             <td><?php echo $user['company_email'];?></td>
-                            <td><span class="label label-success">Approved</span></td>
+                            <td>
+                                <?php
+                                    echo ($user['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                ?>
+                            </td>
                             <td><?php echo $user['designation'];?></td>
                             <td>
                                 <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $user['id'];?>">View</a>

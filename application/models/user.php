@@ -8,9 +8,9 @@ Class User extends CI_Model
    $this -> db -> where('username', $username);
    $this -> db -> where('password', MD5($password));
    $this -> db -> limit(1);
- 
+
    $query = $this -> db -> get();
- 
+
    if($query -> num_rows() == 1)
    {
      return $query->result();
@@ -20,29 +20,45 @@ Class User extends CI_Model
      return false;
    }
  }
- 
+
  function get_total_users()
  {
      return $this->db->count_all('users');
  }
-    
+
 function get_user_detail($user_id)
 {
     $sql = "select * from users where id=$user_id" ;
     $query = $this->db->query($sql);
-    $result = $query->result_array(); 
+    $result = $query->result_array();
     $query->free_result();
     return $result[0];
-}   
-    
+}
+
  function get_users()
  {
      $sql = "select * from users order by id desc" ;
      $query = $this->db->query($sql);
-     $result = $query->result_array(); 
+     $result = $query->result_array();
      $query->free_result();
      return $result;
- }     
-     
+ }
+
+ function get_latest_five_users()
+ {
+    $sql = "select * from users where is_active=1 order by id desc limit 5";
+    $query = $this->db->query($sql);
+    $result = $query->result_array();
+    $query->free_result();
+    return $result;
+ }
+
+ function deactivate_user($user_id)
+ {
+    $sql = "update users set is_active=0 where id=$user_id";
+    $query = $this->db->query($sql);
+
+ }
+
 }
 ?>

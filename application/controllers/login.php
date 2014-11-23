@@ -7,23 +7,23 @@ class Login extends CI_Controller {
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
 	 *	- or -
-	 * Since this controller is set as the default controller in 
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
-	
+
 	function __construct()
 	 {
 	   parent::__construct();
 	   $this->load->model('user','',TRUE);
-	 } 
-	 
+	 }
+
 	public function index()
 	{
 		if($this->session->userdata('logged_in'))
@@ -32,25 +32,25 @@ class Login extends CI_Controller {
 		}
 		else
 		{
-            $this->load->view('login');	
+            $this->load->view('login');
 		}
-        
+
 	}
-	
+
 	function check_database()
 	 {
 	   //Field validation succeeded.  Validate against database
 	   $username = $this->input->post('username');
 	   $password = $this->input->post('password');
-	 
+
 	   //query the database
 	   $result = $this->user->login($username, $password);
-	 
-       //temporary work for admin        
+
+       //temporary work for admin
 	   if($username == "admin@wasl.com" && $password == "wasladmin")
 	   {
 	     $sess_array = array();
-           $this->session->set_userdata('logged_in', array('id' => 1,'username' => $username));   
+           $this->session->set_userdata('logged_in', array('id' => 1,'username' => $username));
 //	     foreach($result as $row)
 //	     {
 //	       $sess_array = array(
@@ -63,13 +63,13 @@ class Login extends CI_Controller {
 	   }
 	   else
 	   {
-           $this->load->view('login',array("error"=>"Invalid username or password"));	
-	     $this->form_validation->set_message('check_database', 'Invalid username or password');
-	     return false;
+			$this->load->view('login',array("error" =>"Invalid username or password"));
+			$this->form_validation->set_message('check_database', 'Invalid username or password');
+			return false;
 	   }
 	 }
-    
-    
+
+
 }
 
 /* End of file welcome.php */

@@ -28,7 +28,11 @@
                         </tr>
                         <tr>
                             <th>Status:</th>
-                            <td><?php echo $detail['status'];?></td>
+                            <td>
+                                <?php
+                                    echo ($detail['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                ?>
+                            </td>
                         </tr>
                         <tr>
                             <th>Personal Email:</th>
@@ -50,8 +54,26 @@
                             <th>Office Number:</th>
                             <td><?php echo $detail['office_no'];?></td>
                         </tr>
+                        <tr>
+                            <td>
+                                <button onclick="confirm_deactive();" class="btn btn-danger">Deactivate User</button>
+                            </td>
+                        </tr>
                     </tbody></table>
             </div>
         </div>
     </div>
 </section><!-- /.content -->
+<script>
+function confirm_deactive()
+{
+    var url = '<?php echo base_url();?>/index.php/welcome/deactivate_user/<?php echo $detail['id'];?>';
+
+    var r = confirm("Are you sure you want to deactivate this user?");
+    if (r == true) {
+        window.location = url;
+    } else {
+
+    }
+}
+</script>

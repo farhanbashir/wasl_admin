@@ -1,4 +1,4 @@
-<!-- Content Header (Page header) -->
+<!--Content Header (Page header) -->
 <section class="content-header">
     <h1>
         Dashboard
@@ -99,249 +99,78 @@
                                 <div class="box-header">
                                     <h3 class="box-title">Latest Five Events</h3>
                                 </div><!-- /.box-header -->
-                                <div class="box-body">
-                                    <table class="table table-bordered">
-                                        <tbody><tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Task</th>
-                                            <th>Progress</th>
-                                            <th style="width: 40px">Label</th>
-                                        </tr>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>Update software</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-red">55%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-yellow">70%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-light-blue">30%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-green">90%</span></td>
-                                        </tr>
-                                    </tbody></table>
-                                </div><!-- /.box-body -->
-                                <div class="box-footer clearfix">
-                                    <ul class="pagination pagination-sm no-margin pull-right">
-                                        <li><a href="#">«</a></li>
-                                        <li><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">»</a></li>
-                                    </ul>
-                                </div>
-                            </div><!-- /.box -->
-
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Latest Five Comments</h3>
-                                </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <table class="table table-condensed">
                                         <tbody><tr>
                                             <th style="width: 10px">#</th>
                                             <th>Task</th>
-                                            <th>Progress</th>
-                                            <th style="width: 40px">Label</th>
+                                            <th>Start Date</th>
+                                            <th style="width: 40px">View</th>
                                         </tr>
+                                        <?php
+                                        $i=0;
+                                        foreach($latest_five_events as $event)
+                                        {
+                                            $i++;
+                                        ?>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Update software</td>
+                                            <td><?php echo $i;?></td>
+                                            <td><?php echo $event['name'];?></td>
+                                            <td><?php echo date('F j, Y',strtotime($event['start_date']));?></td>
                                             <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
+                                                <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>
                                             </td>
-                                            <td><span class="badge bg-red">55%</span></td>
                                         </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-yellow">70%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-light-blue">30%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-green">90%</span></td>
-                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
                                     </tbody></table>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
+
+
                         </div><!-- /.col -->
                         <div class="col-md-6">
                             <div class="box">
                                 <div class="box-header">
                                     <h3 class="box-title">Latest Five Users</h3>
-                                    <div class="box-tools">
-                                        <ul class="pagination pagination-sm no-margin pull-right">
-                                            <li><a href="#">«</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">»</a></li>
-                                        </ul>
-                                    </div>
+
                                 </div><!-- /.box-header -->
                                 <div class="box-body no-padding">
                                     <table class="table">
                                         <tbody><tr>
                                             <th style="width: 10px">#</th>
-                                            <th>Task</th>
-                                            <th>Progress</th>
-                                            <th style="width: 40px">Label</th>
+                                            <th>Name</th>
+                                            <th>Company Name</th>
+                                            <th style="width: 40px">View</th>
                                         </tr>
+                                        <?php
+                                        $i=0;
+                                        foreach($latest_five_users as $user)
+                                        {
+                                            $i++;
+                                        ?>
                                         <tr>
-                                            <td>1.</td>
-                                            <td>Update software</td>
+                                            <td><?php echo $i;?></td>
+                                            <td><?php echo ucfirst($user['first_name'].' '.$user['last_name']);?></td>
+                                            <td><?php echo $user['company_name'];?></td>
                                             <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
+                                                <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $user['id'];?>">View</a>
                                             </td>
-                                            <td><span class="badge bg-red">55%</span></td>
                                         </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-yellow">70%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-light-blue">30%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-green">90%</span></td>
-                                        </tr>
+                                        <?php
+                                        }
+                                        ?>
                                     </tbody></table>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
 
-                            <div class="box">
-                                <div class="box-header">
-                                    <h3 class="box-title">Striped Full Width Table</h3>
-                                </div><!-- /.box-header -->
-                                <div class="box-body no-padding">
-                                    <table class="table table-striped">
-                                        <tbody><tr>
-                                            <th style="width: 10px">#</th>
-                                            <th>Task</th>
-                                            <th>Progress</th>
-                                            <th style="width: 40px">Label</th>
-                                        </tr>
-                                        <tr>
-                                            <td>1.</td>
-                                            <td>Update software</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-red">55%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>2.</td>
-                                            <td>Clean database</td>
-                                            <td>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-yellow">70%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3.</td>
-                                            <td>Cron job running</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-light-blue">30%</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4.</td>
-                                            <td>Fix and squish bugs</td>
-                                            <td>
-                                                <div class="progress xs progress-striped active">
-                                                    <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                                                </div>
-                                            </td>
-                                            <td><span class="badge bg-green">90%</span></td>
-                                        </tr>
-                                    </tbody></table>
-                                </div><!-- /.box-body -->
-                            </div><!-- /.box -->
+
                         </div><!-- /.col -->
                     </div>
 
     <!-- Main row -->
-    
+
 
 </section>
-<!-- /.content -->
+<!-- /.content

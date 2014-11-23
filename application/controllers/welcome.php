@@ -7,10 +7,10 @@ class Welcome extends CI_Controller {
 	 *
 	 * Maps to the following URL
 	 * 		http://example.com/index.php/welcome
-	 *	- or -  
+	 *	- or -
 	 * 		http://example.com/index.php/welcome/index
 	 *	- or -
-	 * Since this controller is set as the default controller in 
+	 * Since this controller is set as the default controller in
 	 * config/routes.php, it's displayed at http://example.com/
 	 *
 	 * So any other public methods not prefixed with an underscore will
@@ -24,20 +24,22 @@ class Welcome extends CI_Controller {
 	   $this->load->model('event','',TRUE);
 	   if(!$this->session->userdata('logged_in'))
 		{
-			redirect(base_url());	
+			redirect(base_url());
 		}
-	 } 
-	 
+	 }
+
 	public function index()
     {
         $data = array();
         $data['total_events'] = $this->event->get_total_events();
         $data['total_users'] = $this->user->get_total_users();
-        
+        $data['latest_five_events'] = $this->event->get_latest_five_events();
+        $data['latest_five_users'] = $this->user->get_latest_five_users();
+
 		$content = $this->load->view('content.php', $data ,true);
-        $this->load->view('welcome_message', array('content' => $content));	
+        $this->load->view('welcome_message', array('content' => $content));
 	}
-    
+
     public function user()
     {
         $users = $this->user->get_users();
@@ -46,7 +48,7 @@ class Welcome extends CI_Controller {
         $content = $this->load->view('users.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
-    
+
     public function user_detail($user_id)
     {
         $data = array();
@@ -54,25 +56,25 @@ class Welcome extends CI_Controller {
         $content = $this->load->view('user_detail.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
-    
+
     public function event_detail($event_id)
     {
         $data = array();
         $data['detail'] = $this->event->get_event_detail($event_id);
         $content = $this->load->view('event_detail.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
-        
+
     }
 
     public function event_users($event_id)
     {
         $data = array();
         $data['event_users'] = $this->event->get_event_users($event_id);
-        
+
         $content = $this->load->view('event_users.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
-    
+
     public function event()
     {
         $events = $this->event->get_events();
@@ -86,12 +88,24 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view("login");
 	}
-    
+
     public function logout()
     {
         $this->session->sess_destroy();
-        redirect(base_url());	
-    }    
+        redirect(base_url());
+    }
+
+    function deactivate_event($event_id)
+    {
+        $this->event->deactivate_event($event_id);
+        redirect(base_url());
+    }
+
+    function deactivate_user($user_id)
+    {
+        $this->user->deactivate_user($user_id);
+        redirect(base_url());
+    }
 }
 
 /* End of file welcome.php */
