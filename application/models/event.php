@@ -43,7 +43,7 @@ Class Event extends CI_Model
 
  function get_latest_five_events()
  {
-    $sql = "select * from events where is_active=1 order by id desc limit 5";
+    $sql = "select * from events order by id desc limit 5";
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();
@@ -53,6 +53,13 @@ Class Event extends CI_Model
  function deactivate_event($event_id)
  {
     $sql = "update events set is_active=0 where id=$event_id";
+    $query = $this->db->query($sql);
+
+ }
+
+ function activate_event($event_id)
+ {
+    $sql = "update events set is_active=1 where id=$event_id";
     $query = $this->db->query($sql);
 
  }

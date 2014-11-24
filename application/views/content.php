@@ -105,6 +105,7 @@
                                             <th style="width: 10px">#</th>
                                             <th>Task</th>
                                             <th>Start Date</th>
+                                            <th>Status</th>
                                             <th style="width: 40px">View</th>
                                         </tr>
                                         <?php
@@ -117,6 +118,11 @@
                                             <td><?php echo $i;?></td>
                                             <td><?php echo $event['name'];?></td>
                                             <td><?php echo date('F j, Y',strtotime($event['start_date']));?></td>
+                                            <td>
+                                                <?php
+                                                    echo ($event['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                                ?>
+                                            </td>
                                             <td>
                                                 <a href="<?php echo base_url();?>/index.php/welcome/event_detail/<?php echo $event['id'];?>">View</a>
                                             </td>
@@ -142,6 +148,7 @@
                                             <th style="width: 10px">#</th>
                                             <th>Name</th>
                                             <th>Company Name</th>
+                                            <th>Status</th>
                                             <th style="width: 40px">View</th>
                                         </tr>
                                         <?php
@@ -154,6 +161,11 @@
                                             <td><?php echo $i;?></td>
                                             <td><?php echo ucfirst($user['first_name'].' '.$user['last_name']);?></td>
                                             <td><?php echo $user['company_name'];?></td>
+                                            <td>
+                                                <?php
+                                                    echo ($user['is_active'] == 1) ? "<span class='label label-success'>Active</span>" : "<span class='label label-danger'>Inactive</span>";
+                                                ?>
+                                            </td>
                                             <td>
                                                 <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $user['id'];?>">View</a>
                                             </td>

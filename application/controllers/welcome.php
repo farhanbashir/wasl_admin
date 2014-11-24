@@ -101,9 +101,21 @@ class Welcome extends CI_Controller {
         redirect(base_url());
     }
 
+    function activate_event($event_id)
+    {
+        $this->event->activate_event($event_id);
+        redirect(base_url());
+    }
+
     function deactivate_user($user_id)
     {
         $this->user->deactivate_user($user_id);
+        redirect(base_url());
+    }
+
+    function activate_user($user_id)
+    {
+        $this->user->activate_user($user_id);
         redirect(base_url());
     }
 }

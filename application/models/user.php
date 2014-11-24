@@ -46,7 +46,7 @@ function get_user_detail($user_id)
 
  function get_latest_five_users()
  {
-    $sql = "select * from users where is_active=1 order by id desc limit 5";
+    $sql = "select * from users order by id desc limit 5";
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();
@@ -56,6 +56,13 @@ function get_user_detail($user_id)
  function deactivate_user($user_id)
  {
     $sql = "update users set is_active=0 where id=$user_id";
+    $query = $this->db->query($sql);
+
+ }
+
+ function activate_user($user_id)
+ {
+    $sql = "update users set is_active=1 where id=$user_id";
     $query = $this->db->query($sql);
 
  }

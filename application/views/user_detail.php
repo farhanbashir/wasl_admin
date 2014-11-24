@@ -55,9 +55,24 @@
                             <td><?php echo $detail['office_no'];?></td>
                         </tr>
                         <tr>
+                            <?php
+                            if($detail['is_active'] == 1)
+                            {    
+                            ?>
                             <td>
                                 <button onclick="confirm_deactive();" class="btn btn-danger">Deactivate User</button>
                             </td>
+                            <?php
+                            }
+                            else
+                            {    
+                            ?>
+                            <td>
+                                <button onclick="confirm_active();" class="btn btn-success">Activate User</button>
+                            </td>
+                            <?php
+                            }
+                            ?>
                         </tr>
                     </tbody></table>
             </div>
@@ -70,6 +85,18 @@ function confirm_deactive()
     var url = '<?php echo base_url();?>/index.php/welcome/deactivate_user/<?php echo $detail['id'];?>';
 
     var r = confirm("Are you sure you want to deactivate this user?");
+    if (r == true) {
+        window.location = url;
+    } else {
+
+    }
+}
+
+function confirm_active()
+{
+    var url = '<?php echo base_url();?>/index.php/welcome/activate_user/<?php echo $detail['id'];?>';
+
+    var r = confirm("Are you sure you want to activate this user?");
     if (r == true) {
         window.location = url;
     } else {

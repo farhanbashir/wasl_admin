@@ -55,9 +55,24 @@
                             <td><?php echo $detail['description'];?></td>
                         </tr>
                         <tr>
+                            <?php
+                            if($detail['is_active'] == 1)
+                            {    
+                            ?>
                             <td>
                                 <button onclick="confirm_deactive();" class="btn btn-danger">Deactivate Event</button>
                             </td>
+                            <?php
+                            }
+                            else
+                            {    
+                            ?>
+                            <td>
+                                <button onclick="confirm_active();" class="btn btn-success">Activate Event</button>
+                            </td>
+                            <?php
+                            }
+                            ?>
                         </tr>
                     </tbody></table>
             </div>
@@ -70,6 +85,18 @@ function confirm_deactive()
     var url = '<?php echo base_url();?>/index.php/welcome/deactivate_event/<?php echo $detail['id'];?>';
 
     var r = confirm("Are you sure you want to deactivate this event?");
+    if (r == true) {
+        window.location = url;
+    } else {
+
+    }
+}
+
+function confirm_active()
+{
+    var url = '<?php echo base_url();?>/index.php/welcome/activate_event/<?php echo $detail['id'];?>';
+
+    var r = confirm("Are you sure you want to activate this event?");
     if (r == true) {
         window.location = url;
     } else {
