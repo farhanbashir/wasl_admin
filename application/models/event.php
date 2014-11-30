@@ -64,5 +64,12 @@ Class Event extends CI_Model
 
  }
 
+ function edit_event($event_id,$data)
+ {
+    $this->db->where('id', $event_id);
+    $this->db->update('events',$data);
+    return ($this->db->affected_rows() != 1) ? false : true;
+ }
+
 }
 ?>
