@@ -3,7 +3,7 @@
 
     <div class="row">
         <div class="col-xs-12">
-            <p class="lead"><?php echo ucfirst($detail['name']);?></p>
+            <p class="lead"><?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?></p>
             <div class="table-responsive">
 
                 <div class="box box-primary">
@@ -14,28 +14,44 @@
                                 <input name="uniqid" id="uniqid" value="<?php echo $uniqid;?>" type="hidden" />
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="name">Name</label>
-                                            <input type="text" class="form-control" value="<?php echo $detail['name'];?>" id="name" name="name" placeholder="Name of event">
+                                            <label for="name">First Name</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['first_name'];?>" id="first_name" name="first_name" placeholder="First Name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="address">Address</label>
-                                            <input type="text" class="form-control" value="<?php echo $detail['address'];?>" id="address" name="address" placeholder="Address of event">
+                                            <label for="name">Last Name</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['last_name'];?>" id="last_name" name="last_name" placeholder="Last Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Username</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['username'];?>" id="username" disabled name="username" placeholder="Username">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Phone</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['phone'];?>" id="phone" name="phone" placeholder="Phone">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="address">Office Phone</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['office_no'];?>" id="office_no" name="office_no" placeholder="Office Phone">
                                         </div>
                                         <div class="form-group">
                                             <label for="created_date">Created Date</label>
-                                            <input type="text" class="form-control" disabled value="<?php echo $detail['created_date'];?>" id="created_date" name="created_date" placeholder="">
+                                            <input type="text" class="form-control" disabled value="<?php echo $detail['created'];?>" id="created_date" name="created_date" placeholder="">
                                         </div>
                                         <div class="form-group">
-                                            <label for="user">Creator</label>
-                                            <input type="text" class="form-control" value="<?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?>" disabled id="user" name="user" placeholder="Creator of event">
+                                            <label for="user">Personal Email</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['personal_email'];?>" disabled id="personal_email" name="personal_email" placeholder="Personal Email">
                                         </div>
                                         <div class="form-group">
-                                            <label for="start_date">Start Date</label>
-                                            <input type="text" class="form-control" value="<?php echo $detail['start_date'];?>" id="start_date" name="start_date" placeholder="Start Date of event">
+                                            <label for="user">Company Email</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['company_email'];?>" disabled id="company_email" name="company_email" placeholder="Company Email">
                                         </div>
                                         <div class="form-group">
-                                            <label for="end_date">End Date</label>
-                                            <input type="text" class="form-control" value="<?php echo $detail['end_date'];?>" id="end_date" name="end_date" placeholder="End Date of event">
+                                            <label for="start_date">Designation</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['designation'];?>" id="designation" name="designation" placeholder="Designation">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="end_date">Company</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['company_name'];?>" id="company_name" name="company_name" placeholder="Company Name">
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">Status</label>
@@ -43,15 +59,6 @@
                                                 <option value="0" <?php echo ($detail['is_active'] == 0) ? 'selected' : '';?>>Inactive</option>
                                                 <option value="1" <?php echo ($detail['is_active'] == 1) ? 'selected' : '';?>>Active</option>
                                             </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="end_date">Description</label>
-                                            <textarea class="form-control" name="description" rows="3" placeholder="Enter ..."><?php echo $detail['description'];?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">File input</label>
-                                            <input type="file" id="exampleInputFile">
-                                            <p class="help-block">Example block-level help text here.</p>
                                         </div>
                                     </div><!-- /.box-body -->
 

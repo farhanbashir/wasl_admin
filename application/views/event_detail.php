@@ -7,7 +7,7 @@
             <div class="table-responsive">
                 <table class="table">
                     <tbody><tr>
-                        <th style="width:50%">Name:</th>
+                        <th style="width:30%">Name:</th>
                         <td><?php echo $detail['name'];?></td>
                         </tr>
                         <tr>
@@ -57,7 +57,7 @@
                         <tr>
                             <?php
                             if($detail['is_active'] == 1)
-                            {    
+                            {
                             ?>
                             <td>
                                 <button onclick="confirm_deactive();" class="btn btn-danger">Deactivate Event</button>
@@ -65,7 +65,7 @@
                             <?php
                             }
                             else
-                            {    
+                            {
                             ?>
                             <td>
                                 <button onclick="confirm_active();" class="btn btn-success">Activate Event</button>
@@ -73,6 +73,9 @@
                             <?php
                             }
                             ?>
+                            <td>
+                                <a href="<?php echo base_url();?>/index.php/welcome/edit_event/<?php echo $detail['id'];?>" class="btn btn-success">Edit Event</a>
+                            </td>
                         </tr>
                     </tbody></table>
             </div>

@@ -48,11 +48,11 @@
                                             <label for="end_date">Description</label>
                                             <textarea class="form-control" name="description" rows="3" placeholder="Enter ..."><?php echo $detail['description'];?></textarea>
                                         </div>
-                                        <div class="form-group">
+                                        <!-- <div class="form-group">
                                             <label for="exampleInputFile">File input</label>
                                             <input type="file" id="exampleInputFile">
                                             <p class="help-block">Example block-level help text here.</p>
-                                        </div>
+                                        </div> -->
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">

@@ -67,5 +67,12 @@ function get_user_detail($user_id)
 
  }
 
+ function edit_user($user_id,$data)
+ {
+    $this->db->where('id', $user_id);
+    $this->db->update('users',$data);
+    return ($this->db->affected_rows() != 1) ? false : true;
+ }
+
 }
 ?>

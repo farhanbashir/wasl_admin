@@ -131,32 +131,35 @@ class Welcome extends CI_Controller {
 
         $this->load->library('form_validation');
 
-        $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('description', 'Description', 'trim|required');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required');
-        $this->form_validation->set_rules('start_date', 'Start Date', 'trim|required');
-        $this->form_validation->set_rules('end_date', 'End Date', 'trim|required');
+        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('office_no', 'Office Phone', 'trim|required');
+        $this->form_validation->set_rules('designation', 'Designation', 'trim|required');
+        $this->form_validation->set_rules('company_name', 'Company', 'trim|required');
         $this->form_validation->set_rules('is_active', 'Status', 'trim|required');
 
         if ($this->form_validation->run())
         {
            // Form was submitted and there were no errors
-           $name        = $this->input->post('name');
-           $address     = $this->input->post('address');
-           $start_date  = $this->input->post('start_date');
-           $end_date    = $this->input->post('end_date');
+           $first_name   = $this->input->post('first_name');
+           $last_name    = $this->input->post('last_name');
+           $phone        = $this->input->post('phone');
+           $office_no    = $this->input->post('office_no');
            $is_active    = $this->input->post('is_active');
-           $description = $this->input->post('description', true);
+           $designation  = $this->input->post('designation');
+           $company_name = $this->input->post('company_name');
 
 
            $uniqid = $this->input->post('uniqid');
-           $service_id = (int) $this->input->post('service_id');
+           //$user_id = (int) $this->input->post('user_id');
 
-           $params       = array('name'=>$name,
-           'address'     =>$address,
-           'start_date'  =>$start_date,
-           'description' =>$description,
-           'end_date'    =>$end_date,
+           $params        = array('first_name'=>$first_name,
+           'last_name'    =>$last_name,
+           'phone'        =>$phone,
+           'office_no'    =>$office_no,
+           'designation'  =>$designation,
+           'company_name' =>$company_name,
            'is_active'    =>$is_active
            );
 
@@ -179,7 +182,7 @@ class Welcome extends CI_Controller {
 
 
         $data['uniqid'] = $uniqid;
-        $data['detail'] = $this->event->get_user_detail($user_id);
+        $data['detail'] = $this->user->get_user_detail($user_id);
         $content = $this->load->view('edit_user.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
