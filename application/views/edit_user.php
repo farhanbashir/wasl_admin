@@ -63,7 +63,7 @@
                                     </div><!-- /.box-body -->
 
                                     <div class="box-footer">
-                                        <button type="submit" class="btn btn-primary">Edit Event</button>
+                                        <button type="submit" class="btn btn-primary">Edit User</button>
                                     </div>
                                 </form>
                             </div>

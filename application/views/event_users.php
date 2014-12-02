@@ -1,4 +1,4 @@
-<!-- Content Header (Page header) -->
+
 <section class="content-header">
     <h1>
         Event Users
@@ -15,14 +15,14 @@
             <div class="box">
                 <div class="box-header">
 <!--                    <h3 class="box-title">Sample Table</h3>-->
-                    <div class="box-tools">
+                    <!-- <div class="box-tools">
                         <div class="input-group">
                             <input type="text" name="table_search" class="form-control input-sm pull-right" style="width: 150px;" placeholder="Search"/>
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-default"><i class="fa fa-search"></i></button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
@@ -79,4 +79,4 @@
             </div><!-- /.box -->
         </div>
     </div>
-</section><!-- /.content -->
+</section><!-- /.content
