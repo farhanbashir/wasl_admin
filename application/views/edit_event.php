@@ -46,7 +46,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">Description</label>
-                                            <textarea class="form-control" name="description" rows="3" placeholder="Enter ..."><?php echo $detail['description'];?></textarea>
+                                            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter ..."><?php echo $detail['description'];?></textarea>
                                         </div>
                                         <!-- <div class="form-group">
                                             <label for="exampleInputFile">File input</label>
@@ -68,6 +68,42 @@
 <script>
 function check_edit_event()
 {
+    var count = 0;
 
+    if($('#name').val() == '')
+    {
+        count++;
+        $('#name').parent().addClass('has-error');
+    }
+
+    if($('#address').val() == '')
+    {
+        count++;
+        $('#address').parent().addClass('has-error');
+    }
+
+    if($('#start_date').val() == '')
+    {
+        count++;
+        $('#start_date').parent().addClass('has-error');
+    }
+
+    if($('#end_date').val() == '')
+    {
+        count++;
+        $('#end_date').parent().addClass('has-error');
+    }
+
+    if($('#description').val() == '')
+    {
+        count++;
+        $('#description').parent().addClass('has-error');
+    }
+
+
+    if(count == 0)
+        return true;
+    else
+        return false;
 }
 </script>

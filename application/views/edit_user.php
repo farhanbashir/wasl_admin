@@ -9,7 +9,7 @@
                 <div class="box box-primary">
 
                                 <!-- form start -->
-                                <form name="edit_event" id="edit_event" action="" method="POST" onsubmit="return check_edit_event();">
+                                <form name="edit_event" id="edit_event" action="" method="POST" onsubmit="return check_edit_user();">
                                 <input name="is_submit" id="is_submit" value="1" type="hidden" />
                                 <input name="uniqid" id="uniqid" value="<?php echo $uniqid;?>" type="hidden" />
                                     <div class="box-body">
@@ -73,8 +73,51 @@
     </div>
 </section><!-- /.content -->
 <script>
-function check_edit_event()
+function check_edit_user()
 {
+    var count = 0;
+
+    if($('#first_name').val() == '')
+    {
+        count++;
+        $('#first_name').parent().addClass('has-error');
+    }
+
+    if($('#last_name').val() == '')
+    {
+        count++;
+        $('#last_name').parent().addClass('has-error');
+    }
+
+    if($('#phone').val() == '')
+    {
+        count++;
+        $('#phone').parent().addClass('has-error');
+    }
+
+    if($('#office_no').val() == '')
+    {
+        count++;
+        $('#office_no').parent().addClass('has-error');
+    }
+
+    if($('#designation').val() == '')
+    {
+        count++;
+        $('#designation').parent().addClass('has-error');
+    }
+
+    if($('#company_name').val() == '')
+    {
+        count++;
+        $('#company_name').parent().addClass('has-error');
+    }
+
+    if(count == 0)
+        return true;
+    else
+        return false;
+
 
 }
 </script>
