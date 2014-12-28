@@ -251,6 +251,77 @@ class Welcome extends CI_Controller {
         $content = $this->load->view('edit_event.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
+
+    function address()
+    {
+
+  debug($LatLng);
+    }
+
+    function create_event()
+    {
+        $message = "";
+        $admin = $this->user->get_admin();
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('name', 'Name', 'trim|required');
+        $this->form_validation->set_rules('description', 'Description', 'trim|required');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('start_date', 'Start Date', 'trim|required');
+        $this->form_validation->set_rules('end_date', 'End Date', 'trim|required');
+        $this->form_validation->set_rules('is_active', 'Status', 'trim|required');
+
+        $lat_long = get_lat_long($this->input->post('address'));
+
+        if ($this->form_validation->run() && is_array($lat_long))
+        {
+           // Form was submitted and there were no errors
+           $name        = $this->input->post('name');
+           $address     = $this->input->post('address');
+           $start_date  = $this->input->post('start_date');
+           $end_date    = $this->input->post('end_date');
+           $is_active    = $this->input->post('is_active');
+           $description = $this->input->post('description', true);
+           $latitude    = $lat_long['lat'];
+           $longitude    = $lat_long['lng'];
+
+           $uniqid = $this->input->post('uniqid');
+           $service_id = (int) $this->input->post('service_id');
+
+           $params       = array('name'=>$name,
+           'address'     =>$address,
+           'start_date'  =>$start_date,
+           'description' =>$description,
+           'end_date'    =>$end_date,
+           'user_id'     =>$admin['id'],
+           'latitude'     =>$latitude,
+           'longitude'     =>$longitude,
+           'created_date' => date('Y-m-d H:i:s'),
+           'is_active'    =>$is_active
+           );
+
+
+           $event_id = $this->event->create_event($params);
+
+           redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
+        }
+        else
+        {
+            $is_submit = ($this->input->post('is_submit')) ? $this->input->post('is_submit') : 0;
+            $uniqid = ($this->input->post('uniqid')) ? $this->input->post('uniqid') : uniqid();
+        }
+
+
+        $data = array();
+
+
+
+        $data['uniqid'] = $uniqid;
+        //$data['detail'] = $this->event->get_event_detail($event_id);
+        $content = $this->load->view('create_event.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+
 }
 
 /* End of file welcome.php */

@@ -71,5 +71,12 @@ Class Event extends CI_Model
     return ($this->db->affected_rows() != 1) ? false : true;
  }
 
+ function create_event($data)
+ {
+    $this->db->insert('events',$data);
+    return $this->db->insert_id();
+    //return ($this->db->affected_rows() != 1) ? false : true;
+ }
+
 }
 ?>

@@ -9,6 +9,11 @@ function userdata( $key, $val = null ){
   }
 }
 
+function object2array($object)
+{
+    return json_decode(json_encode($object), TRUE);
+}
+
 function debug($value,$die=false)
 {
 	echo '<pre>';
@@ -21,6 +26,21 @@ function debug($value,$die=false)
 			die;
 }
 
+function get_lat_long($address)
+{
+  $Address = urlencode($address);//"30 Sheikh Zayed Rd - Dubai, United Arab Emirates"
+  $request_url = "http://maps.googleapis.com/maps/api/geocode/xml?address=".$Address."&sensor=true";
+  $xml = simplexml_load_file($request_url) or die("url not loading");
+  $status = $xml->status;
+  if ($status=="OK") {
+      $arr = object2array($xml);
+      return $arr['result']['geometry']['location'];
+
+  }
+  else
+    return false;
+}
+
 function asset_url($uri)
 {
 	$CI =& get_instance();
@@ -30,46 +50,46 @@ function asset_url($uri)
 //to generate an image tag, set tag to true. you can also put a string in tag to generate the alt tag
 function asset_img($uri)
 {
-	
+
 		return asset_url('img/'.$uri);
-	
-	
+
+
 }
 
 function asset_js($uri)
 {
-	
+
 		return asset_url('js/'.$uri);
-	
+
 }
 
 //you can fill the tag field in to spit out a link tag, setting tag to a string will fill in the media attribute
 function asset_css($uri)
 {
-		
+
 	return asset_url('css/'.$uri);
 }
 
 //to generate an image tag, set tag to true. you can also put a string in tag to generate the alt tag
 function admin_asset_img($uri)
 {
-	
+
 		return asset_url('admin/img/'.$uri);
-	
-	
+
+
 }
 
 function admin_asset_js($uri)
 {
-	
+
 		return asset_url('admin/js/'.$uri);
-	
+
 }
 
 //you can fill the tag field in to spit out a link tag, setting tag to a string will fill in the media attribute
 function admin_asset_css($uri)
 {
-		
+
 	return asset_url('admin/css/'.$uri);
 }
 
@@ -81,7 +101,7 @@ function dateDiff($time1, $time2, $precision = 6) {
     if (!is_int($time2)) {
       $time2 = strtotime($time2);
     }
- 
+
     // If time1 is bigger than time2
     // Then swap time1 and time2
     if ($time1 > $time2) {
@@ -89,11 +109,11 @@ function dateDiff($time1, $time2, $precision = 6) {
       $time1 = $time2;
       $time2 = $ttime;
     }
- 
+
     // Set up intervals and diffs arrays
     $intervals = array('year','month','day','hour','minute','second');
     $diffs = array();
- 
+
     // Loop thru all intervals
     foreach ($intervals as $interval) {
       // Set default diff to 0
@@ -108,7 +128,7 @@ function dateDiff($time1, $time2, $precision = 6) {
 	$ttime = strtotime("+1 " . $interval, $time1);
       }
     }
- 
+
     $count = 0;
     $times = array();
     // Loop thru all diffs
@@ -117,7 +137,7 @@ function dateDiff($time1, $time2, $precision = 6) {
       if ($count >= $precision) {
 	break;
       }
-      // Add value and interval 
+      // Add value and interval
       // if value is bigger than 0
       if ($value > 0) {
 	// Add s if value is not 1
@@ -129,20 +149,20 @@ function dateDiff($time1, $time2, $precision = 6) {
 	$count++;
       }
     }
-    
+
     array_pop($times);
     $time_string = implode(", ", $times);
     $time_string = str_replace(array('years','year'),'y',$time_string);
     $time_string = str_replace(array('months','month'),'m',$time_string);
     $time_string = str_replace(array('days','day'),'d',$time_string);
     $time_string = str_replace(array('hours','hour'),'h',$time_string);
-    $time_string = str_replace(array('minutes','minute'),'min',$time_string);    
+    $time_string = str_replace(array('minutes','minute'),'min',$time_string);
     $time_string = str_replace(array('days','day'),'d',$time_string);
     return $time_string;
     // Return string with times
     //return implode(", ", $times);
   }
-  
+
 function xml_to_array($deXml,$main_heading = '') {
     //$deXml = simplexml_load_string($xml);
     $deJson = json_encode($deXml);

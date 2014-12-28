@@ -35,6 +35,15 @@ function get_user_detail($user_id)
     return $result[0];
 }
 
+function get_admin()
+{
+    $sql = "select * from users where username='admin@wasl.com'" ;
+    $query = $this->db->query($sql);
+    $result = $query->result_array();
+    $query->free_result();
+    return $result[0];
+}
+
  function get_users()
  {
      $sql = "select * from users order by id desc" ;
@@ -46,7 +55,7 @@ function get_user_detail($user_id)
 
  function get_latest_five_users()
  {
-    $sql = "select * from users order by id desc limit 5";
+    $sql = "select * from users where username!='admin@wasl.com' order by id desc limit 5";
     $query = $this->db->query($sql);
     $result = $query->result_array();
     $query->free_result();

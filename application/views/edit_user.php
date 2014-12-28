@@ -2,7 +2,7 @@
 <section class="content">
 
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-6">
             <p class="lead"><?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?></p>
             <div class="table-responsive">
 
