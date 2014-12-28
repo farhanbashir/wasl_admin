@@ -37,9 +37,23 @@
                         <tr>
                             <th>Creator:</th>
                             <td>
+                                <?php
+                                if($detail['is_admin'] == 1)
+                                {
+                                ?>
+                                <?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?>
+                                <?php
+                                }
+                                else
+                                {
+                                ?>
                                 <a href="<?php echo base_url();?>/index.php/welcome/user_detail/<?php echo $detail['user_id'];?>">
                                 <?php echo ucfirst($detail['first_name'].' '.$detail['last_name']);?>
                                 </a>
+                                <?php
+                                }
+                                ?>
+
                             </td>
                         </tr>
                         <tr>

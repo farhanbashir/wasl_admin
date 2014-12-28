@@ -20,7 +20,7 @@ Class Event extends CI_Model
 
  function get_event_detail($event_id)
  {
-     $sql = "select u.first_name,u.last_name,e.* from events e
+     $sql = "select u.first_name,u.last_name,u.is_admin,e.* from events e
             inner join users u on e.user_id=u.id
             where e.id=$event_id" ;
      $query = $this->db->query($sql);
