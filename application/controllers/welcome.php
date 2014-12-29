@@ -260,6 +260,13 @@ class Welcome extends CI_Controller {
 
     function create_event()
     {
+        $upload_path = $_SERVER['DOCUMENT_ROOT'].'/wasl/images/';
+        $config['upload_path'] = $upload_path;//'./uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '100';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        $this->load->library('upload',$config);
         $message = "";
         $admin = $this->user->get_admin();
         $this->load->library('form_validation');
@@ -267,13 +274,15 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('description', 'Description', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('latitude', 'Latitude', 'trim|required');
+        $this->form_validation->set_rules('longitude', 'Longitude', 'trim|required');
         $this->form_validation->set_rules('start_date', 'Start Date', 'trim|required');
         $this->form_validation->set_rules('end_date', 'End Date', 'trim|required');
         $this->form_validation->set_rules('is_active', 'Status', 'trim|required');
 
-        $lat_long = get_lat_long($this->input->post('address'));
+        //$lat_long = get_lat_long($this->input->post('address'));
 
-        if ($this->form_validation->run() && is_array($lat_long))
+        if ($this->form_validation->run())
         {
            // Form was submitted and there were no errors
            $name        = $this->input->post('name');
@@ -282,11 +291,26 @@ class Welcome extends CI_Controller {
            $end_date    = $this->input->post('end_date');
            $is_active    = $this->input->post('is_active');
            $description = $this->input->post('description', true);
-           $latitude    = $lat_long['lat'];
-           $longitude    = $lat_long['lng'];
+           $latitude = $this->input->post('latitude');
+           $longitude = $this->input->post('longitude');
+           //$latitude    = $lat_long['lat'];
+           //$longitude    = $lat_long['lng'];
+           $image = "";
 
            $uniqid = $this->input->post('uniqid');
            $service_id = (int) $this->input->post('service_id');
+
+           if ( ! $this->upload->do_upload('image'))
+            {
+              $error = array('error' => $this->upload->display_errors());
+            }
+            else
+            {
+              $data = $this->upload->data();
+
+              $image = 'images/'.$data['raw_name'].$data['file_ext'];
+
+            }
 
            $params       = array('name'=>$name,
            'address'     =>$address,
@@ -297,9 +321,9 @@ class Welcome extends CI_Controller {
            'latitude'     =>$latitude,
            'longitude'     =>$longitude,
            'created_date' => date('Y-m-d H:i:s'),
+           'image' => $image,
            'is_active'    =>$is_active
            );
-
 
            $event_id = $this->event->create_event($params);
 

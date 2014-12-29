@@ -9,7 +9,7 @@
                 <div class="box box-primary">
 
                                 <!-- form start -->
-                                <form name="create_event" id="create_event" action="" method="POST" onsubmit="return check_create_event();">
+                                <form name="create_event" id="create_event" action="" method="POST" onsubmit="return check_create_event();" enctype="multipart/form-data">
                                 <input name="is_submit" id="is_submit" value="1" type="hidden" />
                                 <input name="uniqid" id="uniqid" value="<?php echo $uniqid;?>" type="hidden" />
                                     <div class="box-body">
@@ -22,12 +22,25 @@
                                             <input type="text" class="form-control" value="" id="address" name="address" placeholder="Address of event">
                                         </div>
                                         <div class="form-group">
+                                            <label for="latitude">Latitude</label>
+                                            <input type="text" class="form-control" value="" id="latitude" name="latitude" placeholder="Latitude of event">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="longitude">Longitude</label>
+                                            <input type="text" class="form-control" value="" id="longitude" name="longitude" placeholder="Longitude of event">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="start_date">Start Date</label>
                                             <input type="text" class="form-control" value="" id="start_date" name="start_date" placeholder="Start Date of event">
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">End Date</label>
                                             <input type="text" class="form-control" value="" id="end_date" name="end_date" placeholder="End Date of event">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Event Image</label>
+                                            <input type="file" id="image" name="image">
+                                            <!-- <p class="help-block">Example block-level help text here.</p> -->
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">Status</label>
@@ -72,6 +85,18 @@ function check_create_event()
     {
         count++;
         $('#address').parent().addClass('has-error');
+    }
+
+    if($('#latitude').val() == '')
+    {
+        count++;
+        $('#latitude').parent().addClass('has-error');
+    }
+
+    if($('#longitude').val() == '')
+    {
+        count++;
+        $('#longitude').parent().addClass('has-error');
     }
 
     if($('#start_date').val() == '')
