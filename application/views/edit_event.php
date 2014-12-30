@@ -22,6 +22,14 @@
                                             <input type="text" class="form-control" value="<?php echo $detail['address'];?>" id="address" name="address" placeholder="Address of event">
                                         </div>
                                         <div class="form-group">
+                                            <label for="latitude">Latitude</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['latitude'];?>" id="latitude" name="latitude" placeholder="Latitude of event">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="longitude">Longitude</label>
+                                            <input type="text" class="form-control" value="<?php echo $detail['longitude'];?>" id="longitude" name="longitude" placeholder="Longitude of event">
+                                        </div>
+                                        <div class="form-group">
                                             <label for="created_date">Created Date</label>
                                             <input type="text" class="form-control" disabled value="<?php echo $detail['created_date'];?>" id="created_date" name="created_date" placeholder="">
                                         </div>
@@ -36,6 +44,11 @@
                                         <div class="form-group">
                                             <label for="end_date">End Date</label>
                                             <input type="text" class="form-control" value="<?php echo $detail['end_date'];?>" id="end_date" name="end_date" placeholder="End Date of event">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputFile">Event Image</label>
+                                            <input type="file" id="image" name="image">
+                                            <!-- <p class="help-block">Example block-level help text here.</p> -->
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">Status</label>
@@ -80,6 +93,18 @@ function check_edit_event()
     {
         count++;
         $('#address').parent().addClass('has-error');
+    }
+
+    if($('#latitude').val() == '')
+    {
+        count++;
+        $('#latitude').parent().addClass('has-error');
+    }
+
+    if($('#longitude').val() == '')
+    {
+        count++;
+        $('#longitude').parent().addClass('has-error');
     }
 
     if($('#start_date').val() == '')

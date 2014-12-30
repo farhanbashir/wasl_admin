@@ -4,6 +4,13 @@
     <div class="row">
         <div class="col-xs-6">
             <p class="lead">Create Event</p>
+            <?php
+            if($error != "")
+            {
+                echo '<p class="has-error">';print_r($error);echo '</p>';    
+            }    
+            
+            ?>
             <div class="table-responsive">
 
                 <div class="box box-primary">

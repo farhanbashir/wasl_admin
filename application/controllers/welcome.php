@@ -247,7 +247,7 @@ class Welcome extends CI_Controller {
 
 
         $data['uniqid'] = $uniqid;
-        $data['detail'] = $this->event->get_event_detail($event_id);
+        $data['detail'] = $this->event->get_event_detail($event_id);debug($data,1);
         $content = $this->load->view('edit_event.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
@@ -255,12 +255,15 @@ class Welcome extends CI_Controller {
     function address()
     {
 
-  debug($LatLng);
+  debug($_SERVER,1);
     }
 
     function create_event()
     {
-        $upload_path = $_SERVER['DOCUMENT_ROOT'].'/wasl/images/';
+        $data = array();
+
+        //$upload_path = $_SERVER['DOCUMENT_ROOT'].'/wasl/images/';
+        $upload_path = './assets/uploads/';
         $config['upload_path'] = $upload_path;//'./uploads/';
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '100';
@@ -281,7 +284,7 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('is_active', 'Status', 'trim|required');
 
         //$lat_long = get_lat_long($this->input->post('address'));
-
+        $data['error'] = "";
         if ($this->form_validation->run())
         {
            // Form was submitted and there were no errors
@@ -302,14 +305,19 @@ class Welcome extends CI_Controller {
 
            if ( ! $this->upload->do_upload('image'))
             {
-              $error = array('error' => $this->upload->display_errors());
+              $data['error'] = $this->upload->display_errors();
             }
             else
             {
               $data = $this->upload->data();
 
-              $image = 'images/'.$data['raw_name'].$data['file_ext'];
+              $image = 'assets/uploads/'.$data['raw_name'].$data['file_ext'];
+              $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
 
+              
+              $path = substr($_SERVER['REQUEST_URI'],0,stripos($_SERVER['REQUEST_URI'], "index.php"));
+              $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;    
+              
             }
 
            $params       = array('name'=>$name,
@@ -325,9 +333,13 @@ class Welcome extends CI_Controller {
            'is_active'    =>$is_active
            );
 
-           $event_id = $this->event->create_event($params);
+           if($image != "")
+           {
+              $event_id = $this->event->create_event($params);
 
-           redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
+              redirect(base_url().'index.php/welcome/event_detail/'.$event_id);  
+           } 
+           
         }
         else
         {
@@ -336,10 +348,7 @@ class Welcome extends CI_Controller {
         }
 
 
-        $data = array();
-
-
-
+        
         $data['uniqid'] = $uniqid;
         //$data['detail'] = $this->event->get_event_detail($event_id);
         $content = $this->load->view('create_event.php', $data ,true);
