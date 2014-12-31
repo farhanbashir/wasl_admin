@@ -4,12 +4,25 @@
     <div class="row">
         <div class="col-xs-6">
             <p class="lead"><?php echo ucfirst($detail['name']);?></p>
+            <?php
+            if($error != "")
+            {
+            ?>    
+            <div class="alert alert-danger alert-dismissable">
+                <i class="fa fa-ban"></i>
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                <b>Alert!</b> <?php echo $error;?>
+            </div>
+                
+            <?php
+            }    
+            ?>
             <div class="table-responsive">
 
                 <div class="box box-primary">
 
                                 <!-- form start -->
-                                <form name="edit_event" id="edit_event" action="" method="POST" onsubmit="return check_edit_event();">
+                                <form name="edit_event" id="edit_event" action="" method="POST" onsubmit="return check_edit_event();" enctype="multipart/form-data">
                                 <input name="is_submit" id="is_submit" value="1" type="hidden" />
                                 <input name="uniqid" id="uniqid" value="<?php echo $uniqid;?>" type="hidden" />
                                     <div class="box-body">
@@ -48,7 +61,16 @@
                                         <div class="form-group">
                                             <label for="exampleInputFile">Event Image</label>
                                             <input type="file" id="image" name="image">
-                                            <!-- <p class="help-block">Example block-level help text here.</p> -->
+                                            <?php
+                                            if($detail['image'] != "")
+                                            {    
+                                            ?>
+                                            <p class="help-block">
+                                                <img width="300" height="300" src="<?php echo $detail['image'];?>" />
+                                            </p>
+                                            <?php
+                                            }    
+                                            ?>
                                         </div>
                                         <div class="form-group">
                                             <label for="end_date">Status</label>

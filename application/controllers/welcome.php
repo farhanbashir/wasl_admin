@@ -189,7 +189,18 @@ class Welcome extends CI_Controller {
 
     function edit_event($event_id)
     {
+        $error = "";
+        $upload_path = './assets/uploads/';
+        $config['upload_path'] = $upload_path;//'./uploads/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '100';
+        $config['max_width']  = '1024';
+        $config['max_height']  = '768';
+        $this->load->library('upload',$config);
         $message = "";
+        $admin = $this->user->get_admin();
+        $this->load->library('form_validation');
+
         if($event_id == "")
             redirect(base_url());
         else
@@ -202,6 +213,8 @@ class Welcome extends CI_Controller {
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('description', 'Description', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('latitude', 'Latitude', 'trim|required');
+        $this->form_validation->set_rules('longitude', 'Longitude', 'trim|required');
         $this->form_validation->set_rules('start_date', 'Start Date', 'trim|required');
         $this->form_validation->set_rules('end_date', 'End Date', 'trim|required');
         $this->form_validation->set_rules('is_active', 'Status', 'trim|required');
@@ -215,6 +228,8 @@ class Welcome extends CI_Controller {
            $end_date    = $this->input->post('end_date');
            $is_active    = $this->input->post('is_active');
            $description = $this->input->post('description', true);
+           $latitude = $this->input->post('latitude');
+           $longitude = $this->input->post('longitude');
 
 
            $uniqid = $this->input->post('uniqid');
@@ -225,15 +240,38 @@ class Welcome extends CI_Controller {
            'start_date'  =>$start_date,
            'description' =>$description,
            'end_date'    =>$end_date,
-           'is_active'    =>$is_active
+           'is_active'    =>$is_active,
+           'latitude'     =>$latitude,
+           'longitude'     =>$longitude,
            );
 
+          if(isset($_FILES['image'])) 
+          {
+              if ( ! $this->upload->do_upload('image'))
+              {
+                $error = $this->upload->display_errors();
+              }
+              else
+              {
+                $data = $this->upload->data();
 
-           $result = $this->event->edit_event($event_id,$params);
+                $image = 'assets/uploads/'.$data['raw_name'].$data['file_ext'];
+                $protocol = stripos($_SERVER['SERVER_PROTOCOL'],'https') === true ? 'https://' : 'http://';
 
+                
+                $path = substr($_SERVER['REQUEST_URI'],0,stripos($_SERVER['REQUEST_URI'], "index.php"));
+                $image = $protocol.$_SERVER['SERVER_NAME'].$path.$image;    
+                $params['image'] = $image;
+              }  
+          }  
+          
 
-
-           redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
+           if($error == "")
+           {
+              $result = $this->event->edit_event($event_id,$params);  
+              redirect(base_url().'index.php/welcome/event_detail/'.$event_id);
+           } 
+                      
         }
         else
         {
@@ -245,9 +283,9 @@ class Welcome extends CI_Controller {
         $data = array();
 
 
-
+        $data['error'] = $error;
         $data['uniqid'] = $uniqid;
-        $data['detail'] = $this->event->get_event_detail($event_id);debug($data,1);
+        $data['detail'] = $this->event->get_event_detail($event_id);
         $content = $this->load->view('edit_event.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
