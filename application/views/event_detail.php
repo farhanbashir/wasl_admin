@@ -68,6 +68,17 @@
                             <th>Description:</th>
                             <td><?php echo $detail['description'];?></td>
                         </tr>
+                        <?php
+                        if($detail['image'] != "")
+                        {    
+                        ?>
+                        <tr>
+                            <th>Image:</th>
+                            <td><img width="200" height="200" src="<?php echo $detail['image'];?>" /></td>
+                        </tr>
+                        <?php
+                        }
+                        ?>
                         <tr>
                             <?php
                             if($detail['is_active'] == 1)
