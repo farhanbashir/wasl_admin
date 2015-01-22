@@ -49,5 +49,10 @@
                 <li><a href="<?php echo site_url('welcome/create_event') ?>" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i>Create Event</a></li>
             </ul>
         </li>
+        <li class="active">
+            <a href="<?php echo site_url('welcome/report') ?>">
+                <i class="fa fa-dashboard"></i> <span>Events Reported</span>
+            </a>
+        </li>
     </ul>
 </section>

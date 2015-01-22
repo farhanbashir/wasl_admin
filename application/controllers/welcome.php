@@ -22,6 +22,7 @@ class Welcome extends CI_Controller {
 	   parent::__construct();
 	   $this->load->model('user','',TRUE);
 	   $this->load->model('event','',TRUE);
+     $this->load->model('report','',TRUE);
 	   if(!$this->session->userdata('logged_in'))
 		{
 			redirect(base_url());
@@ -81,6 +82,15 @@ class Welcome extends CI_Controller {
         $data = array();
         $data['events'] = $events;
         $content = $this->load->view('event.php', $data ,true);
+        $this->load->view('welcome_message', array('content' => $content));
+    }
+
+    public function report()
+    {
+        $reports = $this->report->get_reports();
+        $data = array();
+        $data['reports'] = $reports;
+        $content = $this->load->view('report.php', $data ,true);
         $this->load->view('welcome_message', array('content' => $content));
     }
 
